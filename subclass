@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+
+from __future__ import with_statement
+
+import sys
+import os.path
+
+FOLDER = 'symbolic/'
+INIT_PY = FOLDER + '__init__.py'
+
+# TODO: do this better
+def subclass(parent, child):
+	parentCaps = parent.capitalize()
+	return """
+from %s import %s
+
+class %s(%s):
+	pass
+""" % (parent, parentCaps, child.capitalize(), parentCaps)
+
+if len(sys.argv) != 3:
+	print "Usage: %s PARENT CHILD" % os.path.basename(__file__)
+	exit
+
+parentFile = sys.argv[1]
+child = sys.argv[2]
+childFile = FOLDER + child + '.py'
+
+if not os.path.exists(parentFile) or not parentFile.endswith('.py'):
+	exit("Parent (%s) must exist and be a python file." % parentFile)
+
+if os.path.exists(childFile):
+	exit("Child (%s) must not exist as be a python file." % child)
+
+parent = os.path.basename(parentFile)[:-3]
+
+with open(childFile, 'w') as f:
+	f.write(subclass(parent, child))
+
+with open(INIT_PY, 'a') as f:
+	f.write("from %s import %s\n" % (child, child.capitalize()))
