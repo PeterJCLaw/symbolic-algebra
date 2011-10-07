@@ -12,7 +12,7 @@ class Value(Thing):
 	def __hash__(self):
 		return self._value
 
-	def __str__(self):
+	def __repr__(self):
 		return "Value(%s)" % self._value
 
 	def __nonzero__(self):

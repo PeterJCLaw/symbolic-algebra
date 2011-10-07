@@ -27,5 +27,5 @@ class Symbol(Thing):
 	def __hash__(self):
 		return hash(self._name)
 
-	def __str__(self):
+	def __repr__(self):
 		return "Symbol(%s)" % self._name
