@@ -1,7 +1,7 @@
 
 from addition import Addition
 from equality import Equality
-from multiply import Multiply
+from multiplication import Multiplication
 from operator import Operator
 from parser import Parser
 from symbol import Symbol

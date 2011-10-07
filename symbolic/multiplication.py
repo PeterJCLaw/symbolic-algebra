@@ -1,5 +1,5 @@
 
 from operator import Operator
 
-class Multiply(Operator):
+class Multiplication(Operator):
 	pass
