@@ -9,6 +9,12 @@ class Operator(Thing):
 		self._left = left
 		self._right = right
 
+	def __eq__(self, other):
+		return self._left == other._left and self._right == other._right
+
+	def __ne__(self, other):
+		return not (self == other)
+
 	@property
 	def left(self):
 		return self._left
@@ -16,9 +22,3 @@ class Operator(Thing):
 	@property
 	def right(self):
 		return self._right
-
-	def __eq__(self, other):
-		return self._left == other._left and self._right == other._right
-
-	def __ne__(self, other):
-		return not (self == other)
