@@ -22,12 +22,14 @@ class Parser(object):
 		token = ''
 		for s in string:
 			# token boundary
-			if s in whitespace and token != '':
-				yield token
-				token = ''
-			elif s in self._punctuation and token != '':
-				yield token
-				token = ''
+			if s in whitespace:
+				if token != '':
+					yield token
+					token = ''
+			elif s in self._punctuation:
+				if token != '':
+					yield token
+					token = ''
 				yield s
 			elif s.isalnum():
 				token += s
