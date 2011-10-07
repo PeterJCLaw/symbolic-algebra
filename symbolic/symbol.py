@@ -29,3 +29,7 @@ class Symbol(Thing):
 
 	def __repr__(self):
 		return "Symbol(%s)" % self._name
+
+	@property
+	def name(self):
+		return self._name

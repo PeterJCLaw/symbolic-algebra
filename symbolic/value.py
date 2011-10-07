@@ -17,3 +17,7 @@ class Value(Thing):
 
 	def __nonzero__(self):
 		return self._value != 0
+
+	@property
+	def value(self):
+		return self._value
