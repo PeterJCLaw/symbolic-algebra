@@ -35,6 +35,20 @@ def parserTest():
 
 	assertParse(expectedTree, "A + 1 = 0")
 
+def parserTest2():
+	expectedTree = Equality(Addition(Value(3),
+	                                 Multiplication(Value(4), Value(5))
+	                                ))
+
+	assertParse(expectedTree, "3 + 4 * 5")
+
+def parserTest3():
+	expectedTree = Equality(Addition(Multiplication(Value(4), Value(5)),
+	                                 Value(3)
+	                                ))
+
+	assertParse(expectedTree, "4 * 5 + 3")
+
 if __name__ == '__main__':
 	print 'modelTest\t',
 	try:
@@ -45,6 +59,18 @@ if __name__ == '__main__':
 	print 'parserTest\t',
 	try:
 		parserTest()
+		print 'PASS',
+	finally:
+		print
+	print 'parserTest2\t',
+	try:
+		parserTest2()
+		print 'PASS',
+	finally:
+		print
+	print 'parserTest3\t',
+	try:
+		parserTest3()
 		print 'PASS',
 	finally:
 		print
