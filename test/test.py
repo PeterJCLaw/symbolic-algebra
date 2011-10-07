@@ -18,6 +18,12 @@ def assertSimpleTrees(expectedTree, actualTree):
 	assert expectedTree.right == actualTree.right
 	assert expectedTree == actualTree
 
+def modelTest():
+	expectedTree = buildSimpleTree()
+	actualTree = buildSimpleTree()
+
+	assertSimpleTrees(expectedTree, actualTree)
+
 def parserTest():
 	expectedTree = buildSimpleTree()
 
@@ -25,12 +31,6 @@ def parserTest():
 	parsedTree = p.parse("A + 1 = 0")
 
 	assertSimpleTrees(expectedTree, parsedTree)
-
-def modelTest():
-	expectedTree = buildSimpleTree()
-	actualTree = buildSimpleTree()
-
-	assertSimpleTrees(expectedTree, actualTree)
 
 if __name__ == '__main__':
 	print 'modelTest\t',
