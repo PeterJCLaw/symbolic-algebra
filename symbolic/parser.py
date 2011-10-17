@@ -6,6 +6,7 @@ from string import whitespace
 from addition import Addition
 from equality import Equality
 from multiplication import Multiplication
+from operator import Operator
 from symbol import Symbol
 from thing import Thing
 from value import Value
@@ -16,31 +17,44 @@ class ParseException(Exception):
 class Parser(object):
 	_operators = '=*/+-'
 	_punctuation = _operators[0] + '()' + _operators[1:]
+	_leftStack = []
 
 	def parse(self, string):
 		string = string.strip()
 		print self._punctuation
 
-		leftStack = []
-
 		for token in self.tokenise(string):
 			print "'"+token+"'"
 			if token in self._operators:
 				# get one from the stack, or error
-				last = leftStack.pop()
+				last = self._leftStack.pop()
 				operator = self._createPunctuation(token)
-				leftStack.append(operator(last, None))
+				self.appendOrMerge(operator(last, None))
 				pass
 			elif token.isdigit():
-				leftStack.append(Value(int(token)))
+				self.appendOrMerge(Value(int(token)))
 			elif token[0].isalpha() and token.isalnum():
-				leftStack.append(Symbol(token))
+				self.appendOrMerge(Symbol(token))
 			else:
 				raise ParseException("Got unexpected token '%s'." % token)
 
-		print leftStack
+		print self._leftStack
 
-		return None
+		if len(self._leftStack) == 0:
+			return None
+
+		return self._leftStack[0]
+
+	def appendOrMerge(self, item):
+		if len(self._leftStack) == 0:
+			self._leftStack.append(item)
+			return
+
+		last = self._leftStack[-1]
+		print 'last=%s' % last
+		if isinstance(last, Operator) and last.right is None:
+			# TODO: avoid this hack
+			self._leftStack[-1]._right = item
 
 	def tokenise(self, string):
 		token = ''
