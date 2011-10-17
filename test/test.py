@@ -18,11 +18,17 @@ def assertSimpleTrees(expectedTree, actualTree):
 	assert expectedTree.right == actualTree.right
 	assert expectedTree == actualTree
 
+def assertTreesMatch(expectedTree, actualTree):
+	if isinstance(expectedTree, Operator):
+		assertTreesMatch(expectedTree.left, actualTree.left)
+		assertTreesMatch(expectedTree.right, actualTree.right)
+	assert expectedTree == actualTree, "\nExpected: %s\n  Actual: %s" % (expectedTree, actualTree)
+
 def assertParse(expectedTree, string):
 	p = Parser()
 	parsedTree = p.parse(string)
 
-	assertSimpleTrees(expectedTree, parsedTree)
+	assertTreesMatch(expectedTree, parsedTree)
 
 def modelTest():
 	expectedTree = buildSimpleTree()
