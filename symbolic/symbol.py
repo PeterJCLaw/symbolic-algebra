@@ -7,25 +7,25 @@ class Symbol(Thing):
 		self._name = name
 
 	def __lt__(self, other):
-		return self._name < other._name
+		return isinstance(other, type(self)) and self._name < other._name
 
 	def __le__(self, other):
-		return self._name <= other._name
+		return isinstance(other, type(self)) and self._name <= other._name
 
 	def __eq__(self, other):
-		return self._name == other._name
+		return isinstance(other, type(self)) and self._name == other._name
 
 	def __ne__(self, other):
-		return self._name != other._name
+		return isinstance(other, type(self)) and self._name != other._name
 
 	def __gt__(self, other):
-		return self._name > other._name
+		return isinstance(other, type(self)) and self._name > other._name
 
 	def __ge__(self, other):
-		return self._name >= other._name
+		return isinstance(other, type(self)) and self._name >= other._name
 
 	def __hash__(self):
-		return hash(self._name)
+		return hash(isinstance(other, type(self)) and self._name)
 
 	def __repr__(self):
 		return "Symbol(%s)" % self._name

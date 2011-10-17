@@ -7,7 +7,7 @@ class Value(Thing):
 		self._value = value
 
 	def __cmp__(self, other):
-		return self._value.__cmp__(other._value)
+		return isinstance(other, type(self)) and self._value.__cmp__(other._value)
 
 	def __hash__(self):
 		return self._value

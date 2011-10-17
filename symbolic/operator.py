@@ -12,7 +12,7 @@ class Operator(Thing):
 		self._right = right
 
 	def __eq__(self, other):
-		return self._left == other._left and self._right == other._right
+		return isinstance(other, type(self)) and self._left == other._left and self._right == other._right
 
 	def __ne__(self, other):
 		return not (self == other)
