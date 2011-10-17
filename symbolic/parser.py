@@ -55,6 +55,15 @@ class Parser(object):
 			# TODO: avoid this hack
 			self._leftStack[-1]._right = item
 
+	def _higherPrecedence(self, first, second):
+		"""
+		Determines if the first Operator type has higher precedence than the second.
+		"""
+	#	print first, second
+		firstPos  = self._operators.index(first._type)
+		secondPos = self._operators.index(second._type)
+		return firstPos < secondPos
+
 	def tokenise(self, string):
 		token = ''
 		for s in string:
