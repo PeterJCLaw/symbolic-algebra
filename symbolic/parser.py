@@ -21,6 +21,7 @@ class Parser(object):
 	def parse(self, string):
 		string = string.strip()
 		self._leftStack = []
+	#	print
 
 		for token in self.tokenise(string):
 		#	print "'"+token+"'"
@@ -63,6 +64,7 @@ class Parser(object):
 			return
 
 		last = self._leftStack[-1]
+	#	print 'item=%s' % item
 	#	print 'last=%s' % last
 		if isinstance(last, Operator) and last.right is None:
 			# TODO: avoid this hack
