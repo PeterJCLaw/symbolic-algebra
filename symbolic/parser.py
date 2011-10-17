@@ -15,7 +15,7 @@ class ParseException(Exception):
 	pass
 
 class Parser(object):
-	_operators = '=*/+-'
+	_operators = '*/+-='
 	_punctuation = _operators[0] + '()' + _operators[1:]
 
 	def parse(self, string):
@@ -25,11 +25,8 @@ class Parser(object):
 		for token in self.tokenise(string):
 		#	print "'"+token+"'"
 			if token in self._operators:
-				# get one from the stack, or error
-				last = self._leftStack.pop()
-				operator = self._createPunctuation(token)
-				self._appendOrMerge(operator(last, None))
-				pass
+				operatorType = self._createPunctuation(token)
+				self._addOperator(operatorType)
 			elif token.isdigit():
 				self._appendOrMerge(Value(int(token)))
 			elif token[0].isalpha() and token.isalnum():
@@ -43,6 +40,22 @@ class Parser(object):
 			return None
 
 		return self._leftStack[0]
+
+	def _addOperator(self, opType):
+		# get one from the stack, or error
+		last = self._leftStack.pop()
+	#	print 'opType=%s' % opType
+	#	print 'last=%s' % last
+
+		if isinstance(last, Operator) and self._higherPrecedence(opType, type(last)):
+	#		print 'doing something clever'
+			self._leftStack.append(last)
+			# TODO: avoid this hack
+			newOp = last._right = opType(last.right, None)
+		else:
+			newOp = opType(last, None)
+
+		self._appendOrMerge(newOp)
 
 	def _appendOrMerge(self, item):
 		if len(self._leftStack) == 0:
