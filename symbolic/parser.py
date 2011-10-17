@@ -21,10 +21,9 @@ class Parser(object):
 	def parse(self, string):
 		string = string.strip()
 		self._leftStack = []
-		print self._punctuation
 
 		for token in self.tokenise(string):
-			print "'"+token+"'"
+		#	print "'"+token+"'"
 			if token in self._operators:
 				# get one from the stack, or error
 				last = self._leftStack.pop()
@@ -38,7 +37,7 @@ class Parser(object):
 			else:
 				raise ParseException("Got unexpected token '%s'." % token)
 
-		print self._leftStack
+	#	print self._leftStack
 
 		if len(self._leftStack) == 0:
 			return None
@@ -51,7 +50,7 @@ class Parser(object):
 			return
 
 		last = self._leftStack[-1]
-		print 'last=%s' % last
+	#	print 'last=%s' % last
 		if isinstance(last, Operator) and last.right is None:
 			# TODO: avoid this hack
 			self._leftStack[-1]._right = item
