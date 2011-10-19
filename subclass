@@ -20,7 +20,7 @@ class %s(%s):
 
 if len(sys.argv) != 3:
 	print "Usage: %s PARENT CHILD" % os.path.basename(__file__)
-	exit
+	exit()
 
 parentFile = sys.argv[1]
 child = sys.argv[2]
