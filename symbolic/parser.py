@@ -18,7 +18,7 @@ class ParseException(Exception):
 	pass
 
 class Parser(object):
-	_operators = '*/+-='
+	_operators = '^*/+-='
 	_punctuation = _operators[0] + '()' + _operators[1:]
 
 	def parse(self, string):
