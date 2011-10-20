@@ -50,5 +50,12 @@ class ParserTests(unittest.TestCase):
 
 		self.assertParse(expectedTree, "4 * 5 - 3")
 
+	def test_operatorPrecedence4(self):
+		expectedTree = Multiplication(Exponent(Value(4), Value(5)),
+		                              Value(3)
+		                             )
+
+		self.assertParse(expectedTree, "4 ^ 5 * 3")
+
 if __name__ == '__main__':
 	unittest.main()
