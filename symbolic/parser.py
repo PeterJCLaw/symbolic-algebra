@@ -19,7 +19,7 @@ class ParseException(Exception):
 
 class Parser(object):
 	_operators = '^*/+-='
-	_punctuation = _operators[0] + '()' + _operators[1:]
+	_punctuation = '()' + _operators
 
 	def parse(self, string):
 		string = string.strip()
