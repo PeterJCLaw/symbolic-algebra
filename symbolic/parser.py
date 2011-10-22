@@ -100,7 +100,8 @@ class Parser(object):
 			else:
 				raise ParseException("Got invalid token '%s'." % s)
 
-		yield token
+		if token != '':
+			yield token
 
 	def _createPunctuation(self, token):
 		if token == '=':
