@@ -25,7 +25,7 @@ class Symbol(Thing):
 		return isinstance(other, type(self)) and self._name >= other._name
 
 	def __hash__(self):
-		return hash(isinstance(other, type(self)) and self._name)
+		return hash(self._name)
 
 	def __repr__(self):
 		return "Symbol(%s)" % self._name
