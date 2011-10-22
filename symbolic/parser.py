@@ -24,7 +24,7 @@ class Parser(object):
 	def parse(self, string):
 		string = string.strip()
 		self._leftStack = []
-	#	print
+	#	print 'Parsing:', string
 
 		for token in self.tokenise(string):
 		#	print "'"+token+"'"
@@ -37,8 +37,7 @@ class Parser(object):
 				self._appendOrMerge(Symbol(token))
 			else:
 				raise ParseException("Got unexpected token '%s'." % token)
-
-	#	print self._leftStack
+		#	print self._leftStack
 
 		if len(self._leftStack) == 0:
 			return None
