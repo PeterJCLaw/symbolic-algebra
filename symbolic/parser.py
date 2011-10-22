@@ -79,7 +79,7 @@ class Parser(object):
 	#	print 'last=%s' % last
 		if isinstance(last, Operator) and last.right is None:
 			# TODO: avoid this hack
-			self._leftStack[-1]._right = item
+			last._right = item
 
 	def _higherPrecedence(self, first, second):
 		"""
