@@ -23,14 +23,27 @@ def assertSimpleTrees(expectedTree, actualTree):
 	assert expectedTree.right == actualTree.right
 	assert expectedTree == actualTree
 
-def assertTreesMatch(expectedTree, actualTree):
-	if isinstance(expectedTree, Operator) and isinstance(actualTree, Operator):
-		assertTreesMatch(expectedTree.left, actualTree.left)
-		assertTreesMatch(expectedTree.right, actualTree.right)
-	assert expectedTree == actualTree, "\nExpected: %s\n  Actual: %s" % (expectedTree, actualTree)
+def prepMessage(expectedTree, actualTree, message, params):
 
-def assertTreesDifferent(expectedTree, actualTree):
+	if message != None:
+		if params != None:
+			message = message % params
+	else:
+		message = ''
+
+	return message + "\nExpected: %s\n  Actual: %s" % (expectedTree, actualTree)
+
+
+def assertTreesMatch(expectedTree, actualTree, message=None, *params):
 	if isinstance(expectedTree, Operator) and isinstance(actualTree, Operator):
 		assertTreesMatch(expectedTree.left, actualTree.left)
 		assertTreesMatch(expectedTree.right, actualTree.right)
-	assert expectedTree != actualTree, "\nExpected: %s\n  Actual: %s" % (expectedTree, actualTree)
+	message = prepMessage(expectedTree, actualTree, message, params)
+	assert expectedTree == actualTree, message
+
+def assertTreesDifferent(expectedTree, actualTree, message=None, *params):
+	if isinstance(expectedTree, Operator) and isinstance(actualTree, Operator):
+		assertTreesMatch(expectedTree.left, actualTree.left)
+		assertTreesMatch(expectedTree.right, actualTree.right)
+	message = prepMessage(expectedTree, actualTree, message, params)
+	assert expectedTree != actualTree, message
