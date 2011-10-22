@@ -22,6 +22,13 @@ class ParserTests(unittest.TestCase):
 
 		self.assertParse(expectedTree, "A + 1 = 0")
 
+	def test_multiAddition(self):
+		expectedTree = Addition(Addition(Value(3), Value(4)),
+		                        Value(5)
+		                       )
+
+		self.assertParse(expectedTree, "3 + 4 + 5")
+
 	def test_simpleMultiplication(self):
 		expectedTree = Addition(Value(3),
 		                        Multiplication(Value(4), Value(5))
