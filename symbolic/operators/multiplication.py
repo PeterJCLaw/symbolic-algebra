@@ -1,5 +1,5 @@
 
-from operator import Operator
+from ..operator import Operator
 
 class Multiplication(Operator):
 	_type = '*'

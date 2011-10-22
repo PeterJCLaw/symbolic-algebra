@@ -3,13 +3,8 @@ import re
 from string import whitespace
 
 # Local imports
-from addition import Addition
-from division import Division
-from equality import Equality
-from exponent import Exponent
-from multiplication import Multiplication
+from .operators import *
 from operator import Operator
-from subtraction import Subtraction
 from symbol import Symbol
 from thing import Thing
 from value import Value
