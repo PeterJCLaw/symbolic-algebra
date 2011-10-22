@@ -22,4 +22,4 @@ class TreeTests(unittest.TestCase):
 		util.assertSimpleTrees(expectedTree, actualTree)
 
 if __name__ == '__main__':
-	unittest.main()
+	unittest.main(buffer=True)

@@ -72,4 +72,4 @@ class ParserTests(unittest.TestCase):
 		self.assertParse(expectedTree, "( 3 + 4 ) * 5")
 
 if __name__ == '__main__':
-	unittest.main()
+	unittest.main(buffer=True)
