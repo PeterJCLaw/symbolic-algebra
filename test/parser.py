@@ -57,5 +57,19 @@ class ParserTests(unittest.TestCase):
 
 		self.assertParse(expectedTree, "4 ^ 5 * 3")
 
+	def test_groups1(self):
+		expectedTree = Addition(Value(3),
+		                        Multiplication(Value(4), Value(5))
+		                       )
+
+		self.assertParse(expectedTree, "3 + ( 4 * 5 )")
+
+	def test_groups2(self):
+		expectedTree = Multiplication(Addition(Value(3), Value(4)),
+		                              Value(5)
+		                             )
+
+		self.assertParse(expectedTree, "( 3 + 4 ) * 5")
+
 if __name__ == '__main__':
 	unittest.main()
