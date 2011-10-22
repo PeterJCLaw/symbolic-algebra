@@ -6,8 +6,23 @@ class Value(Thing):
 	def __init__(self, value):
 		self._value = value
 
-	def __cmp__(self, other):
-		return isinstance(other, type(self)) and self._value.__cmp__(other._value)
+	def __lt__(self, other):
+		return isinstance(other, type(self)) and self._value < other._value
+
+	def __le__(self, other):
+		return isinstance(other, type(self)) and self._value <= other._value
+
+	def __eq__(self, other):
+		return isinstance(other, type(self)) and self._value == other._value
+
+	def __ne__(self, other):
+		return not isinstance(other, type(self)) or self._value != other._value
+
+	def __gt__(self, other):
+		return isinstance(other, type(self)) and self._value > other._value
+
+	def __ge__(self, other):
+		return isinstance(other, type(self)) and self._value >= other._value
 
 	def __hash__(self):
 		return self._value

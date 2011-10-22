@@ -16,7 +16,7 @@ class Symbol(Thing):
 		return isinstance(other, type(self)) and self._name == other._name
 
 	def __ne__(self, other):
-		return isinstance(other, type(self)) and self._name != other._name
+		return not isinstance(other, type(self)) or self._name != other._name
 
 	def __gt__(self, other):
 		return isinstance(other, type(self)) and self._name > other._name
