@@ -80,6 +80,8 @@ class Parser(object):
 		if isinstance(last, Operator) and last.right is None:
 			# TODO: avoid this hack
 			last._right = item
+		else:
+			self._leftStack.append(item)
 
 	def _higherPrecedence(self, first, second):
 		"""
