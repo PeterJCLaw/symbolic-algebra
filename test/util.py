@@ -28,3 +28,9 @@ def assertTreesMatch(expectedTree, actualTree):
 		assertTreesMatch(expectedTree.left, actualTree.left)
 		assertTreesMatch(expectedTree.right, actualTree.right)
 	assert expectedTree == actualTree, "\nExpected: %s\n  Actual: %s" % (expectedTree, actualTree)
+
+def assertTreesDifferent(expectedTree, actualTree):
+	if isinstance(expectedTree, Operator) and isinstance(actualTree, Operator):
+		assertTreesMatch(expectedTree.left, actualTree.left)
+		assertTreesMatch(expectedTree.right, actualTree.right)
+	assert expectedTree != actualTree, "\nExpected: %s\n  Actual: %s" % (expectedTree, actualTree)
