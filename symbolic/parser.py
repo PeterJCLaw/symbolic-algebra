@@ -29,7 +29,7 @@ class Parser(object):
 		for token in self.tokenise(string):
 		#	print "'"+token+"'"
 			if token in self._operators:
-				operatorType = self._createPunctuation(token)
+				operatorType = self._createOperator(token)
 				self._addOperator(operatorType)
 			elif token.isdigit():
 				self._appendOrMerge(Value(int(token)))
@@ -103,7 +103,7 @@ class Parser(object):
 		if token != '':
 			yield token
 
-	def _createPunctuation(self, token):
+	def _createOperator(self, token):
 		if token == '=':
 			return Equality
 		elif token == '^':
