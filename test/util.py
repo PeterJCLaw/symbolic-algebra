@@ -24,7 +24,7 @@ def assertSimpleTrees(expectedTree, actualTree):
 	assert expectedTree == actualTree
 
 def assertTreesMatch(expectedTree, actualTree):
-	if isinstance(expectedTree, Operator):
+	if isinstance(expectedTree, Operator) and isinstance(actualTree, Operator):
 		assertTreesMatch(expectedTree.left, actualTree.left)
 		assertTreesMatch(expectedTree.right, actualTree.right)
 	assert expectedTree == actualTree, "\nExpected: %s\n  Actual: %s" % (expectedTree, actualTree)
